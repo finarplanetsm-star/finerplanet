@@ -1,0 +1,110 @@
+{
+  "blogs": {
+    "featuredBlog": {
+      "slug": "2024-global-business-school-research-rankings",
+      "backgroundImg": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=600&fit=crop",
+      "img": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
+      "dateOfPublishing": "December 28, 2024",
+      "blogHeading": "2024 Global Business School Research Rankings: Key Trends and Insights",
+      "blogDescription": "Comprehensive analysis of this year's rankings reveals significant shifts in research excellence, with emerging markets gaining ground and traditional leaders adapting to new methodologies.",
+      "blogAuthor": "Dr. Sarah Chen",
+      "authorPosition": "Senior Research Analyst",
+      "category": "Rankings",
+      "author": "Dr. Sarah Chen"
+    },
+    "similarBlogs": [
+      {
+        "img": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=300&fit=crop",
+        "title": "Innovation Trends in Top MBA Programs",
+        "slug": "innovation-mba-2024",
+        "publishedAt": "December 18, 2024",
+        "readTime": "4 min read",
+        "blogDescription": "Exploring the latest trends in innovation education and how business schools are adapting their curricula for future leaders.",
+        "category": "Research",
+        "author": "Dr. Emily Roberts"
+      },
+      {
+        "img": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=300&fit=crop",
+        "title": "The Role of Technology in Academic Research",
+        "slug": "tech-academic-research",
+        "publishedAt": "December 15, 2024",
+        "readTime": "5 min read",
+        "blogDescription": "Analyzing how AI, big data, and digital tools are revolutionizing research methods in top universities.",
+        "category": "Research",
+        "author": "Dr. Michael Lee"
+      },
+      {
+        "img": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=300&fit=crop",
+        "title": "Sustainability Initiatives in Business Schools",
+        "slug": "sustainability-business-schools",
+        "publishedAt": "December 12, 2024",
+        "readTime": "3 min read",
+        "blogDescription": "A look at how leading business schools are integrating sustainability and ESG principles into their programs.",
+        "category": "News",
+        "author": "Dr. Sophia Martinez"
+      },
+      {
+        "img": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=300&fit=crop",
+        "title": "Global Collaboration for Academic Excellence",
+        "slug": "global-collaboration-2024",
+        "publishedAt": "December 10, 2024",
+        "readTime": "4 min read",
+        "blogDescription": "Insights into how partnerships between universities worldwide are driving research impact and innovation.",
+        "category": "Research",
+        "author": "Dr. David Kim"
+      },
+      {
+        "img": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=300&fit=crop",
+        "title": "Leadership Development in the 21st Century",
+        "slug": "leadership-development-2024",
+        "publishedAt": "December 8, 2024",
+        "readTime": "3 min read",
+        "blogDescription": "Examining modern approaches to leadership education and how schools are preparing future CEOs.",
+        "category": "News",
+        "author": "Dr. Olivia Johnson"
+      }
+    ],
+    "latestBlogs": [
+      {
+        "img": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=300&fit=crop",
+        "title": "AI in Modern Business Education",
+        "slug": "ai-modern-business-education",
+        "publishedAt": "January 5, 2025",
+        "readTime": "5 min read",
+        "blogDescription": "How artificial intelligence is shaping the curriculum and teaching methods in top business schools.",
+        "category": "Research",
+        "author": "Dr. Emily Roberts"
+      },
+      {
+        "img": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=300&fit=crop",
+        "title": "Emerging Market Strategies",
+        "slug": "emerging-market-strategies",
+        "publishedAt": "January 2, 2025",
+        "readTime": "4 min read",
+        "blogDescription": "Insights into how business schools are training leaders for emerging markets and global competitiveness.",
+        "category": "Rankings",
+        "author": "Dr. Michael Lee"
+      },
+      {
+        "img": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=300&fit=crop",
+        "title": "Sustainable Business Models",
+        "slug": "sustainable-business-models",
+        "publishedAt": "December 30, 2024",
+        "readTime": "3 min read",
+        "blogDescription": "A deep dive into the sustainability-focused programs and initiatives in global business schools.",
+        "category": "News",
+        "author": "Dr. Sophia Martinez"
+      },
+      {
+        "img": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=300&fit=crop",
+        "title": "Blockchain in Finance Education",
+        "slug": "blockchain-finance-education",
+        "publishedAt": "December 27, 2024",
+        "readTime": "4 min read",
+        "blogDescription": "Exploring the integration of blockchain and crypto technologies in finance programs at leading schools.",
+        "category": "Research",
+        "author": "Dr. David Kim"
+      }
+    ]
+  }
+}

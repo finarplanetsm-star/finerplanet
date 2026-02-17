@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_name_authors_names",
+  "info": {
+    "displayName": "authorsName"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "affiliation": {
+      "type": "string"
+    }
+  }
+}

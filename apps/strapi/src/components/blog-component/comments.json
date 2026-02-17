@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blog_component_comments",
+  "info": {
+    "displayName": "comments"
+  },
+  "options": {},
+  "attributes": {
+    "commentatorName": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "text"
+    }
+  }
+}

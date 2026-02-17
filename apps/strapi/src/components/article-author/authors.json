@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_article_author_authors",
+  "info": {
+    "displayName": "authors"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30,
+      "minLength": 2
+    },
+    "affiliation": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

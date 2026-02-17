@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "singularName": "comment",
+    "pluralName": "comments",
+    "displayName": "comment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "text",
+      "minLength": 3,
+      "required": true
+    },
+    "topic": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Methodology",
+        "University or Institutional Analysis",
+        "Author Analysis",
+        "Journal Analysis",
+        "Discipline Analysis",
+        "Suggestions for further research",
+        "Other"
+      ]
+    },
+    "discipline": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Information Systems",
+        "Accounting",
+        "Finance",
+        "Marketing",
+        "Economics",
+        "Management",
+        "Operations Management",
+        "Multidisciplinary",
+        "Practice Journals",
+        "Other"
+      ]
+    },
+    "referenceUrl": {
+      "type": "string"
+    },
+    "citations": {
+      "type": "text",
+      "minLength": 3
+    },
+    "commentApprovalStatus": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Pending",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Declined"
+      ]
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "comments"
+    },
+    "blog": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::blog.blog",
+      "inversedBy": "comments"
+    }
+  }
+}
