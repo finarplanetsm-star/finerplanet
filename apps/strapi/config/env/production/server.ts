@@ -1,4 +1,4 @@
-import cronTasks from "../../cron-tasks"
+// import cronTasks from "../../cron-tasks"
 
 export default ({ env }) => ({
   proxy: true,
@@ -11,6 +11,6 @@ export default ({ env }) => ({
   },
   cron: {
     enabled: env.bool("CRON_ENABLED", false),
-    tasks: cronTasks,
+    // tasks: cronTasks,
   },
 })
