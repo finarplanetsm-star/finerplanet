@@ -41,15 +41,15 @@ export default async function BlogDetailPage({
 
   return (
     <div className="md:p-10">
-      <div className="lg:px-[100px] md:px-[50px] mt-9">
-        <h1 className="blog-title md:text-[32.6px] lg:text-[36px] xl:text-[42px] 2xl:text-[48px]  font-bold text-[26px] mb-10 px-2.5 ">
+      <div className="lg:px-[50px] md:px-[50px] mt-9">
+        <h1 className="text-[#101828] md:text-[32.6px] lg:text-[36px] xl:text-[42px] 2xl:text-[48px] font-Forma-DJR-700 text-[26px] mb-10 px-2.5 ">
           {blog.title}
         </h1>
         <p className="blog-desc text-[18px] md:text-[22px] lg:text-[25px] xl:text-[28px] 2xl:text-[34px] mb-3 px-2.5 ">
           {blog.description}
         </p>
         <p className=" mb-9 font-semibold px-2.5 text-[10px] md:text-[12px] lg:text-[15px] xl:text-[18px] 2xl:text-[20px] mt-7">
-          <span className="blog-title">By: </span> {blog.author}
+          <span className="text-[#101828]">By: </span> {blog.author}
         </p>
         <Image
           src={blog?.thumbnail?.url}
@@ -64,21 +64,23 @@ export default async function BlogDetailPage({
             {/* <p className="flex-1 blog-content text-[0.4rem] md:text-[0.6rem] xl:text-[0.9rem] mt-5 wrap-break-word">
               {blog.content}
             </p> */}
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8 mt-6">
-              {/* Back to home */}
-              <div className="flex items-center gap-2 self-start md:self-auto">
+
+            {/* Updated responsive wrapper for 320px/375px screens */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mt-10">
+              {/* Share and Download - order-1 forces it above on mobile */}
+              <div className="w-full md:w-auto order-1 md:order-2">
+                <ShareAndDownloadButtons pdfUrl={`/blogpdfs/${blogPdf}.pdf`} />
+              </div>
+
+              {/* Back to home - order-2 forces it below on mobile */}
+              <div className="flex flex gap-2 order-2 md:order-1 items-center">
                 <BackToHomeArrow />
                 <Link
                   href="/blogs"
-                  className="text-[18px] md:text-[20px] text-[#1D2A49] font-medium"
+                  className="text-[18px] md:text-[20px] text-[#1D2A49] font-medium whitespace-nowrap"
                 >
                   Back to Home
                 </Link>
-              </div>
-
-              {/* Share and Download */}
-              <div className="w-full md:w-auto">
-                <ShareAndDownloadButtons pdfUrl={`/blogpdfs/${blogPdf}.pdf`} />
               </div>
             </div>
           </div>
@@ -92,11 +94,30 @@ export default async function BlogDetailPage({
                 key={index}
                 className="rounded-[10px] p-2 md:p-5 mt-2 border md:h-[225px] md:w-[461px] border-[rgba(68,98,169,0.2)] shadow-[0_4px_20px_0_rgba(153,86,236,0.08)]"
               >
-                <p className="latest-blogs font-[500] md:py-3 md:px-4 py-[9px] px-3 mb-3 text-[16px] text-left rounded-[sm bg-[rgba(68,98,169,0.1)] inline-flex">
-                  {blog.title}
+                <p className="latest-blogs font-[500] md:py-3 md:px-4 py-[9px] px-3 mb-3 text-[16px] text-left rounded-[12px] bg-[rgba(68,98,169,0.1)] inline-flex">
+                  {blog.tags
+                    ? (() => {
+                        const tags = blog.tags
+                          .split(",")
+                          .map((tag) => tag.trim())
+                        const filteredTags = tags.filter(
+                          (tag) => tag.toLowerCase() !== "all"
+                        )
+                        return filteredTags.length > 0
+                          ? filteredTags
+                              .map(
+                                (tag) =>
+                                  tag.charAt(0).toUpperCase() +
+                                  tag.slice(1).toLowerCase()
+                              )
+                              .join(", ")
+                          : null
+                      })()
+                    : null}
                 </p>
+
                 <p className="latest-blogs text-[18px] md:text-[14px] font-[600]">
-                  {blog.description}
+                  {blog.title}
                 </p>
                 <Link
                   href={`/blogs/${encodeURIComponent(blog.title)}`}
@@ -112,7 +133,7 @@ export default async function BlogDetailPage({
           </div>
         </div>
       </div>
-      <CommentSection blogId={blog.documentId} />
+      <CommentSection blogId={blog.documentId} />{" "}
       <SimilarBlogsSection activeBlog={blog.documentId} />
     </div>
   )

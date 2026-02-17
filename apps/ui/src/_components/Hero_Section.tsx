@@ -1,100 +1,192 @@
 "use client"
 
-import { useRef } from "react"
-import { useArticleSearch } from "@/context/articleContext"
+import { useEffect, useState } from "react"
+import { FilterProvider } from "@/context/filterArticleContext"
 import { useNav } from "@/context/NavContext"
-import { motion } from "framer-motion"
+
+import type { Article } from "@/api/services/articlesCache"
 
 import {
   PublicationLogo,
   ResearchLogo,
   UpdatedAtLogo,
 } from "../../public/articleSvg/article-svg"
+import ResearchImpactSection from "./ResearchImpactSection"
 import ResultsSection from "./ResultsSection"
 import SearchByForm from "./SearchByForm"
+import TopSnapshotSection from "./TopSnapshotSection"
 
-export default function Hero_Section() {
-  const formRef = useRef(null)
-  const { searchClicked } = useArticleSearch()
+interface HeroSectionProps {
+  initialArticles: Article[]
+}
+
+export default function Hero_Section({ initialArticles }: HeroSectionProps) {
   const { active } = useNav()
+  console.log(active)
 
-  const heroDescriptions: Record<string, string> = {
-    Author: "Coming Up...",
-    Article: "Coming Up...",
-    AdvancedSearch: "Coming Up...",
+  // State for Mobile Overlay visibility
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
+  const [hasAutoOpened, setHasAutoOpened] = useState(false)
+
+  useEffect(() => {
+    const isSearchByPage =
+      active === "SearchByAuthor" ||
+      active === "SearchByArticles" ||
+      active === "SearchByUniversity"
+
+    // Check if on mobile device (screen width < 1024px which is the lg breakpoint)
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 1024
+
+    if (isSearchByPage && isMobile) {
+      setIsOverlayOpen(true)
+      setHasAutoOpened(true)
+    } else {
+      setHasAutoOpened(false)
+    }
+  }, [active])
+
+  // Prevent background scroll when overlay is open
+  useEffect(() => {
+    document.body.style.overflow = isOverlayOpen ? "hidden" : "unset"
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [isOverlayOpen])
+
+  const sectionTitles: Record<string, string> = {
+    AuthorsRanking: "AUTHORS RANKING",
+    UniversityRanking: "UNIVERSITY RANKING",
+    SearchByAuthor: "SEARCH BY AUTHOR",
+    SearchByArticles: "SEARCH BY ARTICLE",
+    SearchByUniversity: "SEARCH BY UNIVERSITY",
+    Journals: "JOURNALS",
+    Methodology: "METHODOLOGY",
+    Blogs: "BLOGS",
   }
 
-  console.log(searchClicked)
+  const displayTitle = sectionTitles[active]
+
   return (
-    <div className="relative ">
-      <div
-        className="relative h-[668px] w-full bg-no-repeat bg-cover bg-center"
-        style={{ backgroundImage: "url('/articleSvg/Hero_Frame.png')" }}
-      >
-        {/* <Image className="object-cover z-0 relative" src="/Hero_Frame.png" width={1920} height={568} alt="Hero Frame" /> */}
-        <div className="absolute md:top-[150px] top-[100px] flex flex-col  items-center justify-center mx-auto">
-          {!searchClicked && (
-            <p className="rounded-[56px] bg-[linear-gradient(358deg,#9990E5_-30.8%,rgba(169,202,209,0.26)_96.38%)] article-hero-tag p-[12px]">
-              By {active.split("S").join(" S")}
-            </p>
-          )}
+    <FilterProvider>
+      <div className="relative w-full">
+        {/* --- MOBILE OVERLAY (Using SearchByForm) --- */}
+        {isOverlayOpen && (
+          <div className="lg:hidden fixed inset-0 z-[100] bg-white flex flex-col animate-in slide-in-from-bottom duration-300">
+            {/* Overlay Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
+              <h2 className="typo-mobile-h5">Filters</h2>
+              <button
+                onClick={() => setIsOverlayOpen(false)}
+                className="typo-mobile-body-md text-[#44525D] font-medium text-lg"
+              >
+                Close ✕
+              </button>
+            </div>
 
-          <h1 className="article-title text-[32px] md:text-[44px] lg:text-[64px] max-w-[95%]  md:max-w-[80%] md:mx-auto mt-[8.5px]">
-            The Finerplanet Top 100 Business School Research Rankings™
-          </h1>
-          <div className="bg-gradient-to-r from-[#3B3098] to-[#00A649] w-[75px] h-[2.3px] mb-[20px] mt-[15px] mx-auto" />
+            {/* Overlay Body - REUSING YOUR FORM */}
+            <div className="flex-1 overflow-y-auto bg-[#F8FAFC] p-4">
+              <SearchByForm articles={initialArticles} />
+            </div>
 
-          {!searchClicked && (
-            <div className="flex w-full justify-between items-center lg:max-w-[60%]  mx-auto ">
-              <div className="flex flex-1 flex-col lg:flex-row  gap-[10px] justify-center items-center text-center">
+            {/* Overlay Footer */}
+            <div className="p-4 border-t bg-white flex justify-end">
+              <button
+                onClick={() => setIsOverlayOpen(false)}
+                className="text-desktop-body-md text-right font-bold text-[#2A424B]"
+              >
+                Apply Filters
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* --- MAIN HERO CONTENT --- */}
+        <section className="relative w-full bg-no-repeat bg-cover bg-center">
+          <div className="flex flex-col items-center justify-center pt-6 md:pt-[78px] px-4">
+            <div className="hidden md:flex h-6 items-center justify-center mb-2">
+              {displayTitle && (
+                <p className="typo-desktop-body-xs-heading uppercase tracking-[0.15px] text-[#253430]">
+                  <span className="relative inline-block whitespace-nowrap">
+                    {displayTitle}
+                    {/* ✅ FIXED: Underline only on md and above devices */}
+                    <span className="absolute left-0 bottom-0 h-0.5 w-full bg-[#2F7664]" />
+                  </span>
+                </p>
+              )}
+            </div>
+
+            <h1 className="article-title typo-mobile-h1 md:typo-desktop-h1 text-center text-[#253430]">
+              The Finerplanet™
+              <br />
+              <span className="">Business School Research Rankings</span>
+            </h1>
+
+            <div className="flex w-full text-[#44525D] max-w-[900px] justify-between flex-wrap gap-y-6 mt-[10px]">
+              <div className="flex flex-1 flex-col lg:flex-row gap-[10px] justify-center items-center text-center">
                 <PublicationLogo />
-                <p className="text-[14px] article-info md:text-[18px]">
-                  15,000+ Publications
+                <p className="article-info typo-mobile-body-sm md:typo-desktop-body-lg ">
+                  15,000+ <br className="lg:hidden" /> Publications
                 </p>
               </div>
-              <div className="flex flex-1 flex-col lg:flex-row  gap-3 justify-center items-center  text-center">
+
+              <div className="flex flex-1 flex-col lg:flex-row gap-[10px] justify-center items-center text-center">
                 <ResearchLogo />
-                <p className="text-[14px] article-info md:text-[20px]">
-                  500+ Researchers
+                <p className="article-info typo-mobile-body-sm md:typo-desktop-body-lg">
+                  500+ <br className="lg:hidden" /> Researchers
                 </p>
               </div>
-              <div className="flex flex-1 flex-col lg:flex-row  gap-3 justify-center items-center text-center">
+
+              <div className="flex flex-1 flex-col lg:flex-row gap-[10px] justify-center items-center text-center">
                 <UpdatedAtLogo />
-                <p className="text-[14px] article-info md:text-[20px]">
-                  Updated 2024
+                <p className="article-info typo-mobile-body-sm md:typo-desktop-body-lg ">
+                  Updated <br className="lg:hidden" /> 2025
                 </p>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        </section>
+
+        {active === "Home" ? (
+          <>
+            <TopSnapshotSection articles={initialArticles} />
+            <ResearchImpactSection />
+          </>
+        ) : (
+          <div className="w-full max-w-[1440px] mx-auto px-6 md:pt-[24px]">
+            {/* MOBILE: Trigger Button */}
+            <div className="lg:hidden mt-6">
+              <button
+                className="w-full h-[52px] flex items-center justify-center gap-3 bg-[#DDE7E1] border border-[#2F7664] rounded-lg text-[#253430] font-medium"
+                onClick={() => setIsOverlayOpen(true)}
+              >
+                Search filter
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M22 3H2L10 12.46V19L14 21V12.46L22 3Z" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex flex-col lg:flex-row gap-[21px] mt-[40px] pb-24">
+              {/* DESKTOP: Sidebar (Hidden on mobile) */}
+              <div className="hidden lg:block w-full lg:w-[528px] lg:shrink-0">
+                <SearchByForm articles={initialArticles} />
+              </div>
+
+              {/* Results Area */}
+              <div className="flex-1">
+                <ResultsSection articles={initialArticles} />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-
-      <motion.div
-        animate={{ y: searchClicked ? -470 : 0 }}
-        transition={{
-          duration: 0.3,
-          ease: "easeInOut",
-        }}
-        ref={formRef}
-        id="form-section"
-        className="absolute md:mt-[-100px] mt-[-200px] w-full md:px-26 px-4 z-40"
-      >
-        <SearchByForm />
-      </motion.div>
-
-      {!searchClicked ? (
-        <div className="flex flex-col justify-center items-center md:px-[60px] px-[16px] lg:mt-[30em] md:mt-[32em] mt-[30em] ">
-          <h1 className="article-title md:text-[64px] text-[32px] mb-[26px]">
-            By {active.split("S").join(" S")}
-          </h1>
-
-          <p className="md:text-[20px] article-desc text-[14px]  mb-[3em]">
-            {heroDescriptions[active]}
-          </p>
-        </div>
-      ) : (
-        <ResultsSection />
-      )}
-    </div>
+    </FilterProvider>
   )
 }

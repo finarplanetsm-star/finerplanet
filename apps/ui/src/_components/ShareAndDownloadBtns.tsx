@@ -39,16 +39,13 @@ export default function ShareAndDownloadButtons({ pdfUrl }: Props) {
   const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // 1. Check Auth
     const token = localStorage.getItem("token")
     setIsLoggedIn(!!token)
 
-    // 2. Get URL
     if (typeof window !== "undefined") {
       setCurrentUrl(window.location.href)
     }
 
-    // 3. Close share menu when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setShowShareMenu(false)
@@ -66,68 +63,28 @@ export default function ShareAndDownloadButtons({ pdfUrl }: Props) {
     link.click()
   }
 
-  // Share Links
   const linkedinShare = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`
   const twitterShare = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}`
 
+  const baseBtn =
+    "h-[44px] md:h-[52px] flex items-center justify-center whitespace-nowrap rounded-[9px] shadow-[0_0_10px_0_rgba(0,0,0,0.1)] transform transition-all duration-300 ease-in-out"
+
   return (
-    <div className="flex flex-nowrap gap-3 justify-between md:justify-end items-center w-full relative">
-      {/* --- Share Button (Original Design) --- */}
-      <div className="relative" ref={menuRef}>
-        <button
-          onClick={() => setShowShareMenu(!showShareMenu)}
-          className="flex items-center gap-2 cursor-pointer hover:scale-105 transform transition-all duration-300 ease-in-out py-2 px-3 md:py-3 md:px-5 rounded-[9px] border border-black shadow-[0_0_10px_0_rgba(0,0,0,0.1)] bg-white"
-        >
-          <p className="text-sm md:text-base xl:text-[14px] 2xl:text-[20px]">
-            Share
-          </p>
-          <Image src="/share-icon.svg" alt="share" width={15} height={15} />
-        </button>
-
-        {/* Share Popup Menu (Shows LinkedIn & X) */}
-        {showShareMenu && (
-          <div className="absolute top-full mt-2 left-0 w-max bg-white border border-gray-200 shadow-xl rounded-lg p-3 z-20 flex gap-3 animate-in fade-in zoom-in-95 duration-200">
-            <a
-              href={linkedinShare}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm font-medium hover:bg-gray-50 p-2 rounded transition-colors"
-            >
-              <LinkedinIcon />
-              <span className="hidden md:inline">LinkedIn</span>
-            </a>
-            <div className="w-[1px] bg-gray-200"></div>
-            <a
-              href={twitterShare}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm font-medium hover:bg-gray-50 p-2 rounded transition-colors"
-            >
-              <XIcon />
-              <span className="hidden md:inline">X</span>
-            </a>
-          </div>
-        )}
-      </div>
-
-      {/* --- Download Button (Original Design + Gated Logic) --- */}
+    <div className="flex flex-col gap-3 items-end w-full relative">
+      {/* --- TOP ROW: Download Button --- */}
       <div className="relative group">
         <button
           onClick={isLoggedIn ? handleDownload : undefined}
           disabled={!isLoggedIn}
-          className={`
-            flex items-center justify-center cursor-pointer whitespace-nowrap 
-            hover:scale-105 transform transition-all duration-300 ease-in-out 
-            py-2 px-3 md:py-3 md:px-5 
-            text-sm md:text-base xl:text-[14px] 2xl:text-[20px] 
-            text-white rounded-[9px] shadow-[0_0_10px_0_rgba(0,0,0,0.1)]
-            ${isLoggedIn ? "bg-[#3B3098]" : "bg-gray-400 cursor-not-allowed opacity-80"}
-          `}
+          className={`${baseBtn} px-3 md:px-5 hover:opacity-65 text-white ${
+            isLoggedIn
+              ? "bg-[#3A6E63] cursor-pointer"
+              : "bg-gray-400 opacity-80 cursor-not-allowed"
+          }`}
         >
           Download PDF / Doc
         </button>
 
-        {/* Tooltip for Non-Logged In Users */}
         {!isLoggedIn && (
           <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block w-max z-10">
             <div className="bg-gray-800 text-white text-xs rounded py-2 px-3 shadow-lg relative">
@@ -139,11 +96,87 @@ export default function ShareAndDownloadButtons({ pdfUrl }: Props) {
                 login
               </Link>{" "}
               to download
-              {/* Tooltip Triangle */}
               <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-800"></div>
             </div>
           </div>
         )}
+      </div>
+
+      {/* --- BOTTOM ROW: Share and Comments --- */}
+      <div className="flex flex-wrap gap-3 justify-end items-center w-full">
+        {/* Share Button */}
+        <div className="relative" ref={menuRef}>
+          <button
+            onClick={() => setShowShareMenu(!showShareMenu)}
+            className={`${baseBtn} gap-2 border border-black bg-white hover:opacity-65 px-3 md:px-5 cursor-pointer`}
+          >
+            <p className=" xl:text-[14px] 2xl:text-[17px]">Share</p>
+            <Image src="/share-icon.svg" alt="share" width={15} height={15} />
+          </button>
+
+          {showShareMenu && (
+            <div className="absolute top-full mt-2 right-0 w-max bg-white border border-gray-200 shadow-xl rounded-lg p-3 z-20 flex gap-3 animate-in fade-in zoom-in-95 duration-200">
+              <a
+                href={linkedinShare}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm font-medium hover:bg-gray-50 p-2 rounded transition-colors"
+              >
+                <LinkedinIcon />
+                <span className="hidden md:inline">LinkedIn</span>
+              </a>
+              <div className="w-[1px] bg-gray-200"></div>
+              <a
+                href={twitterShare}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm font-medium hover:bg-gray-50 p-2 rounded transition-colors"
+              >
+                <XIcon />
+                <span className="hidden md:inline">X</span>
+              </a>
+            </div>
+          )}
+        </div>
+
+        {/* Comments & Corrections */}
+        <div className="relative group">
+          <a
+            href={
+              isLoggedIn
+                ? "https://docs.google.com/forms/d/e/1FAIpQLSfVwX7Yff1nSb0dIK75cT1vryZMCx2g-w1bnD1KkQ77sA9wWg/viewform"
+                : "#"
+            }
+            target={isLoggedIn ? "_blank" : undefined}
+            rel={isLoggedIn ? "noopener noreferrer" : undefined}
+            onClick={(e) => {
+              if (!isLoggedIn) e.preventDefault()
+            }}
+            className={`${baseBtn} border border-black px-3 md:px-5 hover:opacity-65 ${
+              isLoggedIn
+                ? "bg-white text-black cursor-pointer"
+                : "bg-gray-400 text-white opacity-80 cursor-not-allowed"
+            }`}
+          >
+            Comments &amp; Corrections
+          </a>
+
+          {!isLoggedIn && (
+            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block w-max z-10">
+              <div className="bg-gray-800 text-white text-xs rounded py-2 px-3 shadow-lg relative">
+                Please{" "}
+                <Link
+                  href="/login"
+                  className="underline text-blue-300 font-bold hover:text-blue-200"
+                >
+                  login
+                </Link>{" "}
+                to submit corrections or feedback
+                <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-800"></div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

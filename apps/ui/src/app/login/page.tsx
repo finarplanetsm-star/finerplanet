@@ -20,23 +20,17 @@ const LoginPage = () => {
     setServerError(null)
 
     try {
-      // 1. Call Strapi Login Endpoint
       const res = await apiClient.post("/auth/local", {
         identifier: values.identifier,
         password: values.password,
       })
 
-      // 2. Store Credentials
       localStorage.setItem("token", res.data.jwt)
       localStorage.setItem("user", JSON.stringify(res.data.user))
-
-      // 3. Redirect (Go back or to home)
-      router.back() // Tries to go back to the article page they were reading
-      // Or: router.push("/")
+      router.push("/blogs")
     } catch (error: any) {
       console.error("Login Error:", error)
-      const message =
-        error.response?.data?.error?.message || "Invalid credentials"
+      const message = "Account not found"
       setServerError(message)
     } finally {
       setSubmitting(false)
@@ -44,10 +38,11 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#F9F6EC] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg border border-gray-100">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          {/* Kept Forma for the Header */}
+          <h2 className="mt-6 text-center text-3xl font-Forma-DJR-700 text-gray-900">
             Researcher Login
           </h2>
         </div>
@@ -61,7 +56,8 @@ const LoginPage = () => {
             <Form className="mt-8 space-y-6">
               <div className="rounded-md shadow-sm -space-y-px p-4">
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {/* Replaced font-medium with Segoe-600 */}
+                  <label className="block text-sm font-Segoe-600 text-gray-700 mb-1">
                     Email or Username
                   </label>
                   <Field
@@ -77,7 +73,8 @@ const LoginPage = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {/* Replaced font-medium with Segoe-600 */}
+                  <label className="block text-sm font-Segoe-600 text-gray-700 mb-1">
                     Password
                   </label>
                   <Field
@@ -94,7 +91,7 @@ const LoginPage = () => {
               </div>
 
               {serverError && (
-                <div className="text-red-600 text-sm text-center bg-red-50 p-2 rounded">
+                <div className="text-red-600 text-sm text-center bg-red-50 p-2 rounded font-Segoe-600">
                   {serverError}
                 </div>
               )}
@@ -102,16 +99,16 @@ const LoginPage = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#3B3098] hover:bg-[#2a226b] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-Segoe-600 rounded-md text-white bg-[#2F7664] hover:bg-[#1D4B40] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
               >
-                {isSubmitting ? "Logging in..." : "Sign in"}
+                {isSubmitting ? "Logging in..." : "Login"}
               </button>
 
               <div className="text-center text-sm">
                 Don't have an account?{" "}
                 <Link
                   href="/sign-up"
-                  className="text-indigo-600 hover:text-indigo-500 font-medium"
+                  className="text-indigo-600 hover:text-indigo-500 font-Segoe-600"
                 >
                   Register here
                 </Link>

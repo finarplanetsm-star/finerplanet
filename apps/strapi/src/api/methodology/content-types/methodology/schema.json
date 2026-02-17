@@ -1,0 +1,39 @@
+{
+  "kind": "singleType",
+  "collectionName": "methodologies",
+  "info": {
+    "singularName": "methodology",
+    "pluralName": "methodologies",
+    "displayName": "Methodology"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Introduction": {
+      "type": "richtext"
+    },
+    "table_1_data": {
+      "type": "json"
+    },
+    "table_1_note": {
+      "type": "text"
+    },
+    "table_2_data": {
+      "type": "json"
+    },
+    "disclaimer_text": {
+      "type": "richtext"
+    },
+    "issue_form_url": {
+      "type": "string"
+    },
+    "references": {
+      "type": "richtext"
+    }
+  }
+}

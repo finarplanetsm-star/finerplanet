@@ -38,11 +38,11 @@ export default function SimilarBlogsSection({
               key={index}
               onClick={() => setActive(category)}
               className={`
-    ${isActive ? "bg-[#3B3098] text-white border-[#3B3098]" : ""}
+    ${isActive ? "bg-[#2F7664] text-white border-[#2F7664]" : ""}
     cursor-pointer transform transition-all duration-300 ease-in-out
-    hover:scale-105 hover:border-[#3B3098]
+    hover:opacity-50 hover:border-[#2F7664]
     border-2 border-[#D1D5DC] rounded-[45.75px]
-    text-[10px] md:text-[12.3px] similar-blogs-tags
+    text-[10px] md:text-[13.5px] similar-blogs-tags
     py-[5px] px-[21px] md:py-[13px] md:px-[36px]
   `}
             >

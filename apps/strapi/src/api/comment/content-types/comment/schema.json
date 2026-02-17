@@ -16,42 +16,6 @@
       "minLength": 3,
       "required": true
     },
-    "topic": {
-      "type": "enumeration",
-      "required": true,
-      "enum": [
-        "Methodology",
-        "University or Institutional Analysis",
-        "Author Analysis",
-        "Journal Analysis",
-        "Discipline Analysis",
-        "Suggestions for further research",
-        "Other"
-      ]
-    },
-    "discipline": {
-      "type": "enumeration",
-      "required": true,
-      "enum": [
-        "Information Systems",
-        "Accounting",
-        "Finance",
-        "Marketing",
-        "Economics",
-        "Management",
-        "Operations Management",
-        "Multidisciplinary",
-        "Practice Journals",
-        "Other"
-      ]
-    },
-    "referenceUrl": {
-      "type": "string"
-    },
-    "citations": {
-      "type": "text",
-      "minLength": 3
-    },
     "commentApprovalStatus": {
       "type": "enumeration",
       "required": true,

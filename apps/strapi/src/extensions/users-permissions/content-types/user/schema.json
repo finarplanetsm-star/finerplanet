@@ -82,7 +82,7 @@
       "unique": true
     },
     "scopusId": {
-      "type": "string",
+      "type": "string"  ,
       "minLength": 10,
       "maxLength": 11,
       "unique": true

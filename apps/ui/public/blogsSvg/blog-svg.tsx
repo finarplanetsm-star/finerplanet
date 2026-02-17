@@ -9,11 +9,12 @@ export function BackToHomeArrow() {
 export function MinuteRead() {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M8.82812 4.41455V8.82909L11.7711 10.3006" stroke="#6A7282" stroke-width="1.47151" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M8.83021 16.1868C12.8937 16.1868 16.1878 12.8927 16.1878 8.82924C16.1878 4.76577 12.8937 1.47168 8.83021 1.47168C4.76675 1.47168 1.47266 4.76577 1.47266 8.82924C1.47266 12.8927 4.76675 16.1868 8.83021 16.1868Z" stroke="#6A7282" stroke-width="1.47151" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8.82812 4.41455V8.82909L11.7711 10.3006" stroke="#6A7282" strokeWidth="1.47151" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M8.83021 16.1868C12.8937 16.1868 16.1878 12.8927 16.1878 8.82924C16.1878 4.76577 12.8937 1.47168 8.83021 1.47168C4.76675 1.47168 1.47266 4.76577 1.47266 8.82924C1.47266 12.8927 4.76675 16.1868 8.83021 16.1868Z" stroke="#6A7282" strokeWidth="1.47151" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
     )
 }
+
 
 export function ArrowRightUp() {
     return (
@@ -32,3 +33,4 @@ export function FeaturedBlogLogo({className}:{className?: string}) {
         </svg>
     )
 }
+

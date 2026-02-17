@@ -38,6 +38,7 @@
     "@strapi/provider-email-mailgun": "^5.2.0",
     "@strapi/provider-upload-aws-s3": "^5.29.0",
     "@strapi/strapi": "^5.2.0",
+    "export-import-kkm": "^1.1.1",
     "koa2-ratelimit": "^1.1.3",
     "lodash": "^4.17.21",
     "pg": "^8.13.1",

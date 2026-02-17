@@ -1,10 +1,12 @@
-import { useEffect, useRef } from "react"
+import { RefObject, useEffect, useRef } from "react"
 
 interface UseInfiniteScrollProps {
   hasMore: boolean
   loading: boolean
   offset?: number
   onLoadMore: () => Promise<void> | void
+  // ✅ New prop to target a specific scrollable container
+  targetRef?: RefObject<HTMLElement | null>
 }
 
 export function useInfiniteScroll({
@@ -12,20 +14,29 @@ export function useInfiniteScroll({
   loading,
   offset = 200,
   onLoadMore,
+  targetRef,
 }: UseInfiniteScrollProps) {
   const triggeredRef = useRef(false)
 
   useEffect(() => {
-    let ticking = false
-
     const checkScroll = async () => {
       if (loading || !hasMore || triggeredRef.current) return
 
-      const scrollTop = window.scrollY
-      const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight
+      let distanceFromBottom = 0
 
-      const distanceFromBottom = documentHeight - (scrollTop + windowHeight)
+      if (targetRef?.current) {
+        // 🟢 Logic for Container Scroll
+        const element = targetRef.current
+        // scrollHeight (Total content) - scrollTop (Current pos) - clientHeight (Visible window)
+        distanceFromBottom =
+          element.scrollHeight - element.scrollTop - element.clientHeight
+      } else {
+        // 🔵 Logic for Window Scroll (Fallback)
+        const scrollTop = window.scrollY
+        const windowHeight = window.innerHeight
+        const documentHeight = document.documentElement.scrollHeight
+        distanceFromBottom = documentHeight - (scrollTop + windowHeight)
+      }
 
       if (distanceFromBottom <= offset) {
         triggeredRef.current = true
@@ -38,19 +49,17 @@ export function useInfiniteScroll({
     }
 
     const handleScroll = () => {
-      if (!ticking) {
-        ticking = true
-        requestAnimationFrame(() => {
-          checkScroll()
-          ticking = false
-        })
-      }
+      requestAnimationFrame(() => {
+        checkScroll()
+      })
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
+    // Attach listener to the specific element if ref exists, otherwise window
+    const element = targetRef?.current || window
+    element.addEventListener("scroll", handleScroll, { passive: true })
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
+      element.removeEventListener("scroll", handleScroll)
     }
-  }, [hasMore, loading, offset, onLoadMore])
+  }, [hasMore, loading, offset, onLoadMore, targetRef])
 }

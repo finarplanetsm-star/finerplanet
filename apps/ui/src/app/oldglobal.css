@@ -1,0 +1,377 @@
+/* Inter */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/* Roboto */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+/* Matter */
+@import url("https://cdn.jsdelivr.net/npm/matter-font@1.6.2/matter.css");
+
+/* nunito sans */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap");
+
+@import "tailwindcss";
+@plugin "tailwind-scrollbar-hide";
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+} */
+
+body {
+  font-family: "Segoe UI", "Inter", "Roboto", sans-serif, "Forma DJR Deck";
+}
+
+.navbar-element {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+  /* optional for hover effect */
+  transition: all 0.3s ease-in-out;
+  /* optional for smooth hover effects */
+}
+
+.searchbar-text {
+  color: #f8f8fa;
+  font-family: "Matter", sans-serif;
+  /* font-size: 18px; */
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.article-title {
+  color: #2a2a2a;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.article-hero-tag {
+  color: #2a2a2a;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.article-info {
+  color: #000;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.form-label {
+  color: var(--Gray-1, #333);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.form-input {
+  color: #b2b2b2;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.article-search-btn {
+  text-align: center;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.article-desc {
+  color: #979797;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.article-results-search {
+  color: #101828;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24.5px;
+}
+
+.article-found-article-text {
+  color: #4a5565;
+  font-family: "Segoe UI", "Inter", "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+.articles-sorted-by {
+  color: #0a0a0a;
+  font-family: "Segoe UI", "Inter", "Roboto", sans-serif;
+  font-size: 12.3px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.article-journal-title {
+  color: #101828;
+  font-family: "Segoe UI", "Inter", "Roboto", sans-serif;
+  font-size: 15.8px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19.69px;
+}
+
+.article-details {
+  color: #4a5565;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer {
+  color: #000;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* blogs */
+
+.blog-metadata {
+  color: #6a7282;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22.073px;
+}
+
+.blog-title {
+  color: #101828;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.blog-read-article {
+  display: inline-flex;
+  height: 39.731px;
+  padding: 8.072px 13.244px 8.955px 13.244px;
+  justify-content: center;
+  align-items: center;
+  gap: 8.829px;
+  flex-shrink: 0;
+}
+
+.blog-desc {
+  color: #4a5565;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28.694px;
+}
+
+.blog-description {
+  color: var(--Text-Text-body, rgba(29, 42, 73, 0.7));
+  text-align: justify;
+  -webkit-line-clamp: unset;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+.blog-content {
+  color: var(--Text-Text-body, rgba(29, 42, 73, 0.7));
+  text-align: justify;
+  -webkit-font-smoothing: antialiased;
+  /* optional for better rendering */
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+  /* leading-trim and text-edge are experimental and may need browser prefixes */
+  leading-trim: both;
+  text-edge: cap;
+}
+
+.latest-blogs {
+  color: var(--Text-Text-title, #1d2a49);
+  text-align: left;
+  /* add if needed */
+  leading-trim: both;
+  text-edge: cap;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  line-height: 130%;
+}
+
+.latest-blogs-read-more {
+  color: #282828;
+  leading-trim: both;
+  text-edge: cap;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.comments {
+  color: #1d2a49;
+  leading-trim: both;
+  text-edge: cap;
+  font-family: Matter;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: -0.56px;
+}
+
+.comments-textarea {
+  color: #979797;
+  font-family: Matter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.commentator-name {
+  color: #000;
+  font-family: "Source Sans Pro";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.comment {
+  color: rgba(0, 0, 0, 0.6);
+  font-family: Matter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.similar-blogs {
+  color: #1d2a49;
+  leading-trim: both;
+  text-edge: cap;
+  font-family: Inter;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: -0.56px;
+}
+
+.similar-blogs-tags {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 35.565px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-71px);
+    /* same as navbar height */
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.5s ease-in-out forwards;
+}
+
+/* Smooth scrollbar hiding */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile menu animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out;
+}

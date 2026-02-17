@@ -466,7 +466,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     openalex_id: Schema.Attribute.String
     openalex_matched_title: Schema.Attribute.String
     publishedAt: Schema.Attribute.DateTime
-    title: Schema.Attribute.String & Schema.Attribute.Required
+    title: Schema.Attribute.Text & Schema.Attribute.Required
     updatedAt: Schema.Attribute.DateTime
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private
@@ -527,10 +527,6 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
   }
   attributes: {
     blog: Schema.Attribute.Relation<"manyToOne", "api::blog.blog">
-    citations: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 3
-      }>
     commentApprovalStatus: Schema.Attribute.Enumeration<
       ["Pending", "Approved", "Declined"]
     > &
@@ -544,21 +540,6 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private
-    discipline: Schema.Attribute.Enumeration<
-      [
-        "Information Systems",
-        "Accounting",
-        "Finance",
-        "Marketing",
-        "Economics",
-        "Management",
-        "Operations Management",
-        "Multidisciplinary",
-        "Practice Journals",
-        "Other",
-      ]
-    > &
-      Schema.Attribute.Required
     locale: Schema.Attribute.String & Schema.Attribute.Private
     localizations: Schema.Attribute.Relation<
       "oneToMany",
@@ -566,19 +547,6 @@ export interface ApiCommentComment extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private
     publishedAt: Schema.Attribute.DateTime
-    referenceUrl: Schema.Attribute.String
-    topic: Schema.Attribute.Enumeration<
-      [
-        "Methodology",
-        "University or Institutional Analysis",
-        "Author Analysis",
-        "Journal Analysis",
-        "Discipline Analysis",
-        "Suggestions for further research",
-        "Other",
-      ]
-    > &
-      Schema.Attribute.Required
     updatedAt: Schema.Attribute.DateTime
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private
@@ -672,6 +640,41 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
           localized: true
         }
       }>
+    updatedAt: Schema.Attribute.DateTime
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private
+  }
+}
+
+export interface ApiMethodologyMethodology extends Struct.SingleTypeSchema {
+  collectionName: "methodologies"
+  info: {
+    displayName: "Methodology"
+    pluralName: "methodologies"
+    singularName: "methodology"
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    createdAt: Schema.Attribute.DateTime
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private
+    disclaimer_text: Schema.Attribute.RichText
+    Introduction: Schema.Attribute.RichText
+    issue_form_url: Schema.Attribute.String
+    locale: Schema.Attribute.String & Schema.Attribute.Private
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "api::methodology.methodology"
+    > &
+      Schema.Attribute.Private
+    publishedAt: Schema.Attribute.DateTime
+    references: Schema.Attribute.RichText
+    table_1_data: Schema.Attribute.JSON
+    table_1_note: Schema.Attribute.Text
+    table_2_data: Schema.Attribute.JSON
+    Title: Schema.Attribute.String
     updatedAt: Schema.Attribute.DateTime
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private
@@ -869,6 +872,44 @@ export interface PluginContentReleasesReleaseAction
     >
     type: Schema.Attribute.Enumeration<["publish", "unpublish"]> &
       Schema.Attribute.Required
+    updatedAt: Schema.Attribute.DateTime
+    updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private
+  }
+}
+
+export interface PluginExportImportKkmExportImportConfig
+  extends Struct.CollectionTypeSchema {
+  collectionName: "export_import_kkm_configs"
+  info: {
+    displayName: "Export Import Config"
+    pluralName: "export-import-configs"
+    singularName: "export-import-config"
+  }
+  options: {
+    draftAndPublish: false
+  }
+  pluginOptions: {
+    "content-manager": {
+      visible: false
+    }
+    "content-type-builder": {
+      visible: false
+    }
+  }
+  attributes: {
+    createdAt: Schema.Attribute.DateTime
+    createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
+      Schema.Attribute.Private
+    locale: Schema.Attribute.String & Schema.Attribute.Private
+    localizations: Schema.Attribute.Relation<
+      "oneToMany",
+      "plugin::export-import-kkm.export-import-config"
+    > &
+      Schema.Attribute.Private
+    publishedAt: Schema.Attribute.DateTime
+    selectedExportCollections: Schema.Attribute.JSON
+    selectedImportCollections: Schema.Attribute.JSON
     updatedAt: Schema.Attribute.DateTime
     updatedBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private
@@ -1320,10 +1361,12 @@ declare module "@strapi/strapi" {
       "api::comment.comment": ApiCommentComment
       "api::configuration.configuration": ApiConfigurationConfiguration
       "api::footer.footer": ApiFooterFooter
+      "api::methodology.methodology": ApiMethodologyMethodology
       "api::navbar.navbar": ApiNavbarNavbar
       "api::page.page": ApiPagePage
       "plugin::content-releases.release": PluginContentReleasesRelease
       "plugin::content-releases.release-action": PluginContentReleasesReleaseAction
+      "plugin::export-import-kkm.export-import-config": PluginExportImportKkmExportImportConfig
       "plugin::i18n.locale": PluginI18NLocale
       "plugin::review-workflows.workflow": PluginReviewWorkflowsWorkflow
       "plugin::review-workflows.workflow-stage": PluginReviewWorkflowsWorkflowStage

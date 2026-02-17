@@ -15,8 +15,9 @@ if (typeof window !== "undefined") {
   apiClient.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem("token")
+      const isAuthRoute = config.url?.includes("/auth/local")
 
-      if (token) {
+      if (token && !isAuthRoute) {
         config.headers.Authorization = `Bearer ${token}`
       }
 

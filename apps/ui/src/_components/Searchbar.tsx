@@ -19,6 +19,8 @@ export default function Searchbar() {
 
   const router = useRouter()
 
+  const inputTextSize =
+    "text-[8px] md:text-[9px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]"
   // Debounce input
   useEffect(() => {
     const handler = setTimeout(() => setDebouncedQuery(query), 300)
@@ -63,16 +65,28 @@ export default function Searchbar() {
   }
 
   return (
-    <div className="relative ">
+    <div className="relative z-10">
       <div className="relative w-full">
-        <MagnifyingSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-white" />
-
+        <MagnifyingSearch
+          className="absolute
+          left-3 md:left-3 lg:left-3 xl:left-4 2xl:left-4
+          top-1/2 -translate-y-1/2 text-black
+          w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 xl:w-5 xl:h-5 2xl:w-5 2xl:h-5"
+        />
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search blogs..."
-          className="searchbar-text w-full h-[50px]  placeholder-[#F8F8FA] rounded-xl bg-[#4D5056] pl-12 p-4"
+          className={`searchbar-text w-full ${inputTextSize}
+             h-[30px] md:h-[32px] lg:h-[38px] xl:h-[44px] 2xl:h-[48px]
+             border
+             text-[8px] md:text-[9px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]
+             rounded-md md:rounded-lg lg:rounded-xl
+             pl-7 md:pl-7 lg:pl-9 xl:pl-11 2xl:pl-12
+             pr-3 md:pr-3 lg:pr-3 xl:pr-4 2xl:pr-4
+             focus:outline-none focus:ring-1 focus:ring-white/20
+             transition-all`}
           onKeyDown={(e) => {
             if (e.key === "ArrowDown") {
               e.preventDefault()
@@ -97,9 +111,13 @@ export default function Searchbar() {
 
       {/* Dropdown */}
       {(loading || results.length > 0) && (
-        <div className="absolute bg-white border border-black mt-1 w-full z-50 max-h-64 overflow-y-auto rounded">
+        <div className="absolute top-full bg-white border border-gray-300 mt-1 w-full z-20 max-h-64 overflow-y-auto rounded-lg shadow-lg">
           {/* Loading state */}
-          {loading && <div className="px-4 py-2 text-gray-500 italic">...</div>}
+          {loading && (
+            <div className="px-4 py-2 text-gray-500 text-sm italic">
+              Searching...
+            </div>
+          )}
 
           {/* Results */}
           {!loading &&
@@ -117,15 +135,15 @@ export default function Searchbar() {
                     setQuery("")
                     setResults([])
                   }}
-                  className={`cursor-pointer px-4 py-2 ${
+                  className={`cursor-pointer px-3 md:px-4 py-2 text-sm md:text-base transition-colors ${inputTextSize} ${
                     highlightIndex === index
-                      ? "bg-gray-300"
+                      ? "bg-gray-200"
                       : "hover:bg-gray-100"
                   }`}
                 >
                   {parts.map((part, i) =>
                     part.toLowerCase() === debouncedQuery.toLowerCase() ? (
-                      <span key={i} className="bg-yellow-300">
+                      <span key={i} className="bg-yellow-300 font-semibold">
                         {part}
                       </span>
                     ) : (
